@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <!-- Agregar CDN de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .register-container {
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        .register-container h2 {
+            color: #4a4a4a;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            padding: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-primary:active {
+            background-color: #003f8a;
+            transform: translateY(0);
+        }
+        .form-footer {
+            margin-top: 20px;
+        }
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .form-footer a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .text-danger {
+            font-size: 0.875rem;
+            color: #e74a3b;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Crear cuenta</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Campo de Usuario -->
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                {{ form.username }}  <!-- Clase aplicada directamente en forms.py -->
+                {% if form.username.errors %}
+                    <div class="text-danger">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Campo de Contraseña -->
+            <div class="form-group">
+                <label for="password1">Contraseña</label>
+                {{ form.password1 }}  <!-- Clase aplicada directamente en forms.py -->
+                {% if form.password1.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Campo de Confirmar Contraseña -->
+            <div class="form-group">
+                <label for="password2">Confirmar Contraseña</label>
+                {{ form.password2 }}  <!-- Clase aplicada directamente en forms.py -->
+                {% if form.password2.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Botón de Submit -->
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+
+        <!-- Enlace a Login -->
+        <div class="form-footer">
+            <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
